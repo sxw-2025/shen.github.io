@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剪纸主题视频课堂展示</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", 微软雅黑, sans-serif;
+        }
+        body {
+            background-color: #f8f5f0; /* 浅米色背景，匹配设计风格 */
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        /* 首页标题栏（保留） */
+        .home-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 25px 0;
+            background-color: #d43d3d;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .home-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+        .home-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+        /* 2×2网格卡片布局 */
+        .card-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 固定2列 */
+            grid-template-rows: repeat(2, 1fr);    /* 固定2行 */
+            gap: 30px; /* 卡片间距 */
+            max-width: 1000px; /* 限制宽度，居中展示 */
+            margin: 0 auto;
+        }
+        .theme-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        .theme-card h2 {
+            color: #d43d3d;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        .theme-card p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+        .theme-card a {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #d43d3d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        .theme-card a:hover {
+            background-color: #b92c2c;
+        }
+        /* 子页面样式 */
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d43d3d;
+        }
+        .sub-header h1 {
+            color: #d43d3d;
+        }
+        .back-btn {
+            padding: 8px 16px;
+            background-color: #d43d3d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .content-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .content-wrap {
+                grid-template-columns: 1fr;
+            }
+            .card-list {
+                grid-template-columns: 1fr; /* 手机端单列 */
+            }
+            .home-header h1 {
+                font-size: 2rem;
+            }
+        }
+        .img-box, .video-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .img-box img, .video-box video {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        /* 新增：给B站iframe加固定高度，确保显示 */
+        .video-box iframe {
+            width: 100%;
+            height: 400px; /* 匹配图片高度，保证视觉协调 */
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .intro-box {
+            grid-column: 1 / -1;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .intro-box h3 {
+            color: #d43d3d;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .intro-box p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <!-- 首页（保留标题栏+2×2卡片） -->
+    <div class="container" id="home-page">
+        <div class="home-header">
+            <h1>剪纸主题视频课堂展示</h1>
+            <p>以剪纸艺术为载体，展望2035与2050的美好未来</p>
+        </div>
+        <div class="card-list">
+            <!-- 第一组卡片 -->
+            <div class="theme-card">
+                <h2>深耕一线 暖心相守</h2>
+                <p>干部深入基层与群众交流，共建美好家园</p>
+                <a href="javascript:showPage(1)">查看详情</a>
+            </div>
+            <!-- 第二组卡片（修正标题） -->
+            <div class="theme-card">
+                <h2>民生暖意 岁月安康</h2>
+                <p>民生幸福场景，定格烟火日常的温暖</p>
+                <a href="javascript:showPage(2)">查看详情</a>
+            </div>
+            <!-- 第三组卡片 -->
+            <div class="theme-card">
+                <h2>同心奋进 共享芬芳</h2>
+                <p>聚焦共同富裕主题，携手奔赴富足生活</p>
+                <a href="javascript:showPage(3)">查看详情</a>
+            </div>
+            <!-- 第四组卡片 -->
+            <div class="theme-card">
+                <h2>家国同心 逐梦远航</h2>
+                <p>诠释人民至上理念，共筑盛世家国</p>
+                <a href="javascript:showPage(4)">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 子页面模板（默认隐藏） -->
+    <div class="container" id="sub-page" style="display: none;">
+        <div class="sub-header">
+            <h1 id="sub-title">主题标题</h1>
+            <a href="javascript:backHome()" class="back-btn">返回首页</a>
+        </div>
+        <div class="content-wrap">
+            <div class="img-box">
+                <h3>剪纸图片</h3>
+                <img id="paper-cut-img" src="" alt="剪纸图片">
+            </div>
+            <div class="video-box">
+                <h3>主题视频</h3>
+                <video id="theme-video" controls>
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+            <div class="intro-box">
+                <h3>介绍词</h3>
+                <p id="intro-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 主题数据配置（仅替换videoSrc为B站嵌入代码，其余完全保留）
+        const themeData = [
+            {},
+            {
+                title: "深耕一线 暖心相守（干部深入基层与群众交流）",
+                imgSrc: "1.jpeg",
+                // 修复：简化iframe代码，确保加载
+                videoSrc: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1PEAJzXE5T&cid=36842048930&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>',
+                //第一组：深耕一线 暖心相守（干部深入基层与群众交流）.mp4
+                intro: "同学们请看这张剪纸：红底白纹间，田间地头里，工作人员正俯身与乡亲们亲切交谈，稻浪翻涌的田埂上、质朴的小院旁，没有距离感，只有心贴心的交流。这正是我们身边最动人的场景——有人走进烟火里，倾听百姓心声，把温暖与关切送到田间巷尾。接下来，就让我们在视频里，看看这份扎根基层的温度，如何在2035、2050年的未来里，延续成更贴心的相守与共建。"
+            },
+            {
+                title: "民生暖意 岁月安康（民生幸福场景）",
+                imgSrc: "2.jpeg",
+                videoSrc: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1cWAJzJEYP&cid=36842242268&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>',
+                //第二组：民生暖意 岁月安康（民生幸福场景）.mp4
+                intro: "这张圆形剪纸里，藏着我们最向往的日常：老人安坐、孩童奔跑，医护人员守护在侧，一家人围坐成最安稳的模样，繁花与笑脸点缀其间。从老有所养到幼有所育，从健康守护到阖家团圆，这就是民生幸福最生动的模样。接下来的视频，会带我们走进2035、2050年的未来，看看这份烟火里的温暖，如何升级成更普惠、更舒心的美好生活。"
+            },
+            {
+                title: "同心奋进 共享芬芳（共同富裕主题）",
+                imgSrc: "3.jpeg",
+                videoSrc: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1HWAJzJE57&cid=36842243800&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>',
+                //第三组：同心奋进 共享芬芳（共同富裕主题）.mp4
+                intro: "这张剪纸里，一双双大手牵着小手，城市高楼与乡村田垄在同一条路上相连，丰收的果篮、畅通的路桥，都在诉说着“携手共进”的故事。它告诉我们：共同富裕不是一句口号，而是城乡携手、你我并肩，让发展的果实惠及每一个人。接下来的视频，将带我们展望2035、2050年的图景，看看这份同心奋进的力量，如何铺就人人共享的富足之路。"
+            },
+            {
+                title: "家国同心 逐梦远航（人民至上/江山就是人民）",
+                imgSrc: "4.jpeg",
+                videoSrc: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1cWAJzJES8&cid=36842244249&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>',
+                //第四组：家国同心 逐梦远航（人民至上江山就是人民）.mp4
+                intro: "最后这张剪纸里，“人民江山”四个大字格外醒目，各族儿女并肩而立，长城蜿蜒、江河奔涌，山河与人民紧紧相依。它向我们传递着最厚重的信念：人民是江山的根基，江山因人民而稳固。接下来的视频，会带我们飞向2035、2050年的未来，看看这份家国同心的情怀，如何铸就一个更繁荣、更温暖的盛世中国。"
+            }
+        ];
+
+        // 显示子页面（仅修改视频渲染逻辑，其余完全保留）
+        function showPage(index) {
+            document.getElementById("home-page").style.display = "none";
+            document.getElementById("sub-page").style.display = "block";
+            const data = themeData[index];
+            document.getElementById("sub-title").textContent = data.title;
+            document.getElementById("paper-cut-img").src = data.imgSrc;
+            // 修复：只替换video标签，保留h3标题
+            const videoBox = document.querySelector(".video-box");
+            videoBox.innerHTML = '<h3>主题视频</h3>' + data.videoSrc;
+            document.getElementById("intro-text").textContent = data.intro;
+        }
+
+        // 返回首页（完全保留原始逻辑）
+        function backHome() {
+            document.getElementById("sub-page").style.display = "none";
+            document.getElementById("home-page").style.display = "block";
+            // 还原video-box原始结构
+            document.querySelector(".video-box").innerHTML = `<h3>主题视频</h3><video id="theme-video" controls>您的浏览器不支持视频播放</video>`;
+        }
+    </script>
+</body>
+</html>
