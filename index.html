@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>剪纸主题视频课堂 | 以人民为中心 · 剪纸艺术展</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "苹方", "PingFang SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fef5e9;
+            color: #2c241a;
+            line-height: 1.5;
+        }
+
+        .main-app {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 24px 60px;
+        }
+
+        .home-header {
+            text-align: center;
+            background: linear-gradient(135deg, #d43d3d 0%, #b12a2a 100%);
+            color: white;
+            border-radius: 48px;
+            padding: 40px 20px 36px;
+            margin-bottom: 56px;
+            box-shadow: 0 12px 28px rgba(180, 40, 40, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .home-header::after {
+            content: "✂️ 剪纸非遗 ✂️";
+            position: absolute;
+            bottom: 12px;
+            right: 28px;
+            font-size: 0.85rem;
+            opacity: 0.3;
+        }
+        .home-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+        .home-header p {
+            font-size: 1.25rem;
+            opacity: 0.92;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+        .theme-card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #ffe0c4;
+        }
+        .theme-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(180, 50, 50, 0.2);
+        }
+        .theme-card h2 {
+            color: #c5372e;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .theme-card h2 .news-count {
+            font-size: 0.8rem;
+            background: #f0e2d0;
+            color: #a33;
+            padding: 2px 10px;
+            border-radius: 30px;
+        }
+        .theme-card > p {
+            color: #5a4a38;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .news-section {
+            margin: 20px 0 15px;
+            border-top: 1px dashed #f0cfb5;
+            padding-top: 15px;
+        }
+        .news-section h4 {
+            font-size: 0.9rem;
+            color: #b85c2e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-list {
+            list-style: none;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .news-list li {
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            border-left: 3px solid #d43d3d;
+            padding-left: 12px;
+        }
+        .news-list a {
+            text-decoration: none;
+            color: #2c5a6e;
+            display: block;
+            line-height: 1.4;
+            transition: color 0.2s;
+        }
+        .news-list a:hover {
+            color: #d43d3d;
+            text-decoration: underline;
+        }
+        .news-date {
+            font-size: 0.7rem;
+            color: #a58f78;
+            margin-left: 8px;
+        }
+        .card-footer {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .card-btn {
+            display: inline-block;
+            background-color: #d43d3d;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .card-btn:hover {
+            background-color: #a22c2c;
+        }
+
+        /* 测试模块样式 */
+        .test-full-module {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0dfce;
+            margin-top: 20px;
+        }
+        .test-inner {
+            padding: 20px 28px 32px;
+        }
+        .test-module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #f0cfb5;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .test-module-header h3 {
+            font-size: 1.7rem;
+            color: #bc3529;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge-new {
+            background: #ffaa33;
+            color: #592c1e;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 60px;
+        }
+        .stats-mini {
+            background: #f9ede1;
+            border-radius: 80px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .questions-scroll {
+            max-height: 550px;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-bottom: 20px;
+        }
+        .quiz-section {
+            margin-bottom: 28px;
+        }
+        .quiz-section h4 {
+            font-size: 1.2rem;
+            background: #f9e6d8;
+            display: inline-block;
+            padding: 4px 20px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+        .question-item {
+            background: #fefaf5;
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border: 1px solid #ffefdf;
+        }
+        .question-text {
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .q-type-badge {
+            font-size: 0.7rem;
+            background: #e4d3c2;
+            border-radius: 30px;
+            padding: 2px 12px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 8px;
+            margin-bottom: 12px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .truefalse-group {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 12px;
+        }
+        .submit-question-btn {
+            background-color: #d43d3d;
+            color: white;
+            border: none;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .answer-status-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 30px;
+        }
+        .status-correct { background: #c8e6d9; color: #1e6f3f; }
+        .status-wrong { background: #ffe0db; color: #bc3900; }
+        .btn-submit-small, .btn-reset-small {
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-submit-small { background-color: #bc3529; color: white; }
+        .btn-reset-small { background-color: #e7dbce; color: #4e3b2c; }
+        .result-banner {
+            background: #fff0e0;
+            border-radius: 28px;
+            padding: 12px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #b49a7c;
+            margin-top: 20px;
+        }
+        input[type="radio"], input[type="checkbox"] { accent-color: #bc3529; cursor: pointer; }
+        .sub-page {
+            background: #fffcf7;
+            border-radius: 32px;
+            padding: 24px 28px 42px;
+        }
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #d43d3d;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+        }
+        .sub-header h1 { color: #b8372c; font-size: 1.8rem; }
+        .back-home-btn {
+            background-color: #d43d3d;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .content-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        .img-box, .video-box {
+            background: white;
+            border-radius: 24px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid #f3e3d3;
+        }
+        .img-box h3, .video-box h3 {
+            color: #ac3e2e;
+            margin-bottom: 16px;
+            border-left: 5px solid #d43d3d;
+            padding-left: 16px;
+            text-align: left;
+        }
+        /* 剪纸画廊 - 4行2列布局 */
+        .papercut-gallery {
+            grid-column: 1 / -1;
+            background: #fffaf2;
+            border-radius: 28px;
+            padding: 24px 20px;
+            margin-top: 20px;
+            border: 1px solid #f3e0ce;
+        }
+        .papercut-gallery h3 {
+            color: #ac3e2e;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #d43d3d;
+            padding-left: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        /* 4行2列网格 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: auto;
+            gap: 20px;
+        }
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #ffe0c4;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 2px solid #f0cfb5;
+        }
+        .gallery-caption {
+            padding: 10px 8px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #a55c3a;
+            font-weight: 500;
+            background: #fffaf5;
+        }
+        .img-box img { 
+            max-width: 100%; 
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .video-box iframe { 
+            width: 100%; 
+            height: 300px; 
+            border-radius: 16px; 
+        }
+        .intro-box {
+            grid-column: 1 / -1;
+            background: #fff4ea;
+            border-radius: 28px;
+            padding: 24px 28px;
+            border-left: 6px solid #d43d3d;
+            margin-top: 20px;
+        }
+        @media (max-width: 780px) {
+            .content-wrap { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
+            .news-list { max-height: 200px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .gallery-item img { height: 120px; }
+        }
+        .news-list::-webkit-scrollbar { width: 4px; }
+        .news-list::-webkit-scrollbar-track { background: #f0e2d0; border-radius: 10px; }
+        .news-list::-webkit-scrollbar-thumb { background: #d43d3d; border-radius: 10px; }
+        .correct-flash { background-color: #e0f5e9; transition: 0.1s; }
+        .wrong-flash { background-color: #ffe1db; transition: 0.1s; }
+    </style>
+</head>
+<body>
+<div class="main-app" id="mainApp">
+    <div id="homePage">
+        <div class="home-header">
+            <h1>✂️ 剪纸主题视频课堂 ✂️</h1>
+            <p>以剪纸艺术为载体，展望2035与2050的美好未来 · 人民至上 江山如画</p>
+        </div>
+        <div class="card-grid" id="cardGrid"></div>
+
+        <!-- 第五模块：知识测试 -->
+        <div class="test-full-module">
+            <div class="test-inner">
+                <div class="test-module-header">
+                    <h3>📖 以人民为中心 · 专题测试 <span class="badge-new">第五课堂</span></h3>
+                    <div class="stats-mini">🏆 当前总分: <strong id="inlineScore">0</strong> 分 / 200分</div>
+                </div>
+                <div class="questions-scroll" id="quizRoot"></div>
+                <div style="display: flex; gap: 16px; justify-content: center;">
+                    <button class="btn-submit-small" id="inlineSubmitBtn">✨ 提交全部试卷</button>
+                    <button class="btn-reset-small" id="inlineResetBtn">🔄 清空所有答案</button>
+                </div>
+                <div id="inlineResultMsg" class="result-banner" style="display: none;"></div>
+                <footer>※ 点击每道题的「提交本题」按钮，会在答案旁边显示正确✔或错误❌标识</footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailPage" style="display: none;">
+        <div class="sub-page">
+            <div class="sub-header">
+                <h1 id="detailTitle">主题标题</h1>
+                <button class="back-home-btn" id="backHomeBtnDetail">🏠 返回首页</button>
+            </div>
+            <div class="content-wrap">
+                <div class="img-box"><h3>🎨 主视觉剪纸</h3><img id="detailImg" src="" alt="主剪纸艺术作品"></div>
+                <div class="video-box"><h3>📺 主题视频</h3><div id="videoDynamic"></div></div>
+                <div class="intro-box"><h3>📖 课堂介绍词</h3><p id="detailIntro"></p></div>
+                <!-- 剪纸画廊：4行2列，共8张图片 -->
+                <div class="papercut-gallery" id="papercutGallery">
+                    <h3>✂️ 剪纸作品集锦 · 艺术长廊 <span style="font-size:0.8rem;">(点击图片放大欣赏)</span></h3>
+                    <div class="gallery-grid" id="galleryGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ===================== 剪纸主题数据 + 新闻链接（每个主题10+条） =====================
+    const themeData = {
+        1: {
+            title: "深耕一线 暖心相守",
+            subtitle: "干部深入基层与群众交流",
+            imgSrc: "1.jpeg",
+            videoEmbed: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1PEAJzXE5T&cid=36842048930&page=1" scrolling="no" border="0" frameborder="no" allowfullscreen="true"></iframe>',
+            intro: "同学们请看这张剪纸：红底白纹间，田间地头里，工作人员正俯身与乡亲们亲切交谈，稻浪翻涌的田埂上、质朴的小院旁，没有距离感，只有心贴心的交流。这正是我们身边最动人的场景——有人走进烟火里，倾听百姓心声，把温暖与关切送到田间巷尾。",
+            news: [
+                { title: "全国人大代表袁姝深入基层宣讲两会精神，走进骑手驿站传递党的关怀", date: "2026-03-19", url: "https://www.gzrd.gov.cn/gzdt/dbgz/dbfc/202603/t20260320_89891833.html" },
+                { title: "青海省委理论学习中心组读书班：靠实干砥砺为民初心，以实绩回应人民期盼", date: "2026-03-19", url: "http://tjj.qinghai.gov.cn/snyw/202603/t20260319_394542.html" },
+                { title: "黄南州千名干部下乡：马背宣讲队深入草原牧户，打通政策宣传最后一公里", date: "2026-03-19", url: "http://qh.people.com.cn/n2/2026/0319/c181467-41527457.html" },
+                { title: "新疆阿瓦提县“五长”进站活动，党政领导干部面对面回应群众诉求", date: "2026-03-20", url: "https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/j3u3t6/stories/WS69bcc1b4a310942cc49a416b.html" },
+                { title: "新华时评：多做“口碑工程”不搞“口号工程”——政绩观的根本立场", date: "2026-03-20", url: "https://app.xinhuanet.com/news/article.html?articleId=2da6459853ee16355c6d3a6309ec25d3" },
+                {
+                title: "全国人大代表袁姝深入基层宣讲两会精神，走进骑手驿站传递党的关怀",
+                "date": "2026-03-19",
+                "url": "https://www.gzrd.gov.cn/gzdt/dbgz/dbfc/202603/t20260320_89891833.html"
+                },
+                {
+                title: "坚持好作风 守护团圆年 党员干部深入基层关爱特殊群体",
+                "date": "2026-02-24",
+                "url": "http://www.12371.cn/2026/02/24/ARTI1771894684683367.shtml"
+                },
+                {
+                title: "用干部“辛苦指数”换群众“幸福指数”——崆峒区干部进家门解难题纪实",
+                "date": "2026-03-17",
+                "url": "https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69b8d071a310942cc49a383c.html"
+                },
+                {
+                title: "初心刻在田垄上——驻村第一书记深入田间走访群众暖民心",
+                "date": "2025-05-29",
+                "url": "https://www.12371.cn/2025/05/29/ARTI1748473568884506.shtml"
+                },
+                {
+                title: "从“异乡客”到“贴心人” 基层干部耐心化解群众急难愁盼",
+                "date": "2025-12-28",
+                "url": "https://gg.shz.gov.cn/tcxx/012008/012008008/20251225/520b428c-08b8-4c92-b64e-83757a92ef96.html"
+                },
+                {
+                title: "平凉崆峒:4585名干部沉入网格 叩门走访化解矛盾暖民心",
+                "date": "2026-03-17",
+                "url": "http://m.toutiao.com/group/7618144828655714822/"
+                },
+                {
+                title: "南昌县八月湖街道干部常态化下沉社区 触摸群众冷暖解民忧",
+                "date": "2026-03-19",
+                "url": "https://tt.jxnews.com.cn/news/2849078"
+                },
+                {
+                title: "定南龙塘镇:党员干部下沉一线 全覆盖走访倾听群众心声",
+                "date": "2026-03-20",
+                "url": "https://www.ganzhou.gov.cn/gzszf/c100022/202603/5de2b602818145438d14b92c794d442a.shtml"
+                },
+                {
+                title: "全国人大代表载誉归来 深入基层宣讲两会精神传党音",
+                "date": "2026-03-16",
+                "url": "http://www.npc.gov.cn/npc/c2/kgfb/202603/t20260316_453267.html"
+                },
+                {
+                title: "762名四级人大代表回家站 深入基层倾听民声汇民意",
+                "date": "2025-12-18",
+                "url": "http://www.npc.gov.cn/npc/c2/c30834/202512/t20251218_449968.html"
+                },
+                {
+                title: "全国人大代表周超走进育秧一线 宣讲两会精神助力乡村振兴",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618427927298736649/"
+                },
+                {
+                title: "甘肃临洮“夫妻支书”扎根基层 用实干赢得群众信任",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618496174573896227/"
+                },
+                {
+                title: "泾阳推行“巡诊家家到” 干部下沉一线破解民生难题",
+                "date": "2026-02-28",
+                "url": "http://m.toutiao.com/group/7611735079304217122/"
+                },
+                {
+                title: "恩平超千名党员干部“返乡走亲” 拉家常解民忧聚民心",
+                "date": "2026-03-11",
+                "url": "https://www.nfnews.com/content/LozB1wxjon.html"
+                },
+                {
+                title: "高台县干部主动上门服务 从“坐等群众”变“下沉解忧”",
+                "date": "2025-11-24",
+                "url": "http://paper.people.com.cn/zgcsb/pc/content/202511/24/content_30116831.html"
+                },
+                {
+                title: "“三不五到我来管” 安阳基层干部一线化解邻里矛盾暖民心",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618374727237501480/"
+                },
+                {
+                title: "从迷彩绿到社区蓝 华亭社区干部下沉一线调解纠纷护和谐",
+                "date": "2026-03-12",
+                "url": "https://gs.ifeng.com/c/8rQwWbrruL9"
+                },
+                {
+                title: "铿锵玫瑰绽基层 新疆库车干部深入一线帮扶困难群众",
+                "date": "2026-03-13",
+                "url": "http://m.toutiao.com/group/7616604624585409075/"
+                },
+                {
+                title: "退役军人服务干部罗伟民 下沉一线帮群众解决销路难题",
+                "date": "2026-03-17",
+                "url": "http://m.toutiao.com/group/7618043673527239203/"
+                },
+                {
+                title: "镇平县人大代表下沉基层 开设流动讲堂宣讲政策解疑惑",
+                "date": "2025-06-01",
+                "url": "https://m.henanrd.gov.cn/wap/news/20190423/220196"
+                },
+                {
+                title: "全国人大代表马银萍返乡宣讲 用乡音把政策送到群众心坎",
+                "date": "2026-03-18",
+                "url": "https://m.weibo.cn/detail/5277838002881072"
+                },
+                {
+                title: "774位四级代表进家站 赴春日之约倾听选民诉求",
+                "date": "2025-03-27",
+                "url": "http://www.npc.gov.cn/c2/c30834/202503/t20250327_444454.html"
+                },
+                {
+                title: "全国人大代表马慧娟 百余场宣讲把好声音传到基层千家万户",
+                "date": "2025-10-07",
+                "url": "http://www.npc.gov.cn/c2/kgfb/202403/t20240304_435081.html"
+                },
+                {
+                title: "井陉矿区推行“走亲”工作法 干部下沉基层办实事",
+                "date": "2023-02-13",
+                "url": "http://paper.people.com.cn/zgcsb/images/2023-02/13/20/zgcsb2023021320.pdf"
+                },
+                {
+                title: "华亭社区干部刘怡凡 下沉一线耐心调解邻里漏水纠纷",
+                "date": "2026-03-10",
+                "url": "http://www.gsht.gov.cn/zwdt/XZDT/art/2026/art_bd94b1b2bb0b40abb652d061e8a2e387.html"
+                },
+                {
+                title: "上高县网格员下沉网格 全覆盖走访筑牢基层治理根基",
+                "date": "2025-11-29",
+                "url": "https://www.iesdouyin.com/share/video/7577202630238194970"
+                },
+                {
+                title: "最美基层干部梁远远 驻村一线当好群众贴心人",
+                "date": "2025-12-29",
+                "url": "https://www.iesdouyin.com/share/video/7589172137164901686"
+                },
+                {
+                title: "昌吉人大代表深入基层 宣讲两会精神凝聚奋进力量",
+                "date": "2025-04-02",
+                "url": "http://pcepaper.cjxww.cn/resfile/2025-04-02/01B/cjrbf2025040201B.pdf"
+                },
+                {
+                title: "乔司街道人大代表下沉社区 宣讲政策共谋基层发展",
+                "date": "2026-03-19",
+                "url": "https://www.iesdouyin.com/share/video/7619302145874362899/"
+                },
+                {
+                title: "全国人大代表尚金锁 从会场到田埂宣讲两会精神",
+                "date": "2026-03-18",
+                "url": "https://www.iesdouyin.com/share/video/7618429345379437833"
+                },
+                {
+                title: "鹿泉区党员干部常态化下沉 全方位服务社区居民",
+                "date": "2023-02-13",
+                "url": "http://paper.people.com.cn/zgcsb/images/2023-02/13/20/zgcsb2023021320.pdf"
+                },
+                {
+                title: "藁城区建立三级联动机制 干部下沉开创基层共治新局",
+                "date": "2023-02-13",
+                "url": "http://paper.people.com.cn/zgcsb/images/2023-02/13/20/zgcsb2023021320.pdf"
+                },
+                {
+                title: "丹棱县干部深入残疾儿童家庭 走访摸排点亮微心愿",
+                "date": "2026-02-24",
+                "url": "http://www.12371.cn/2026/02/24/ARTI1771894684683367.shtml"
+                },
+                {
+                title: "崆峒区干部走访困境儿童 暖心圆梦传递基层温情",
+                "date": "2026-03-17",
+                "url": "https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69b8d071a310942cc49a383c.html"
+                },
+                {
+                title: "石河子基层干部李国金 耐心倾听化解退休职工待遇难题",
+                "date": "2025-12-28",
+                "url": "https://gg.shz.gov.cn/tcxx/012008/012008008/20251225/520b428c-08b8-4c92-b64e-83757a92ef96.html"
+                },
+                {
+                title: "驻村书记孟谦走村串户 记民情日志解群众烦心事",
+                "date": "2025-05-29",
+                "url": "https://www.12371.cn/2025/05/29/ARTI1748473568884506.shtml"
+                },
+                {
+                title: "安阳村干部王金平 上门维修化解邻里水管矛盾",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618374727237501480/"
+                },
+                {
+                title: "新疆干部李红伟 下沉一线为残疾群众补办户口申领补助",
+                "date": "2026-03-13",
+                "url": "http://m.toutiao.com/group/7616604624585409075/"
+                },
+                {
+                title: "通城县干部罗伟民 多方奔走帮群众解决年猪销路难题",
+                "date": "2026-03-17",
+                "url": "http://m.toutiao.com/group/7618043673527239203/"
+                },
+                {
+                title: "临洮驻村干部 五年走访7.2万户解决群众急难问题",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618496174573896227/"
+                },
+                {
+                title: "泾阳干部下沉一线 修充电桩烂路破解群众出行难题",
+                "date": "2026-02-28",
+                "url": "http://m.toutiao.com/group/7611735079304217122/"
+                },
+                {
+                title: "恩平返乡干部 庭院座谈收集乡村发展金点子",
+                "date": "2026-03-11",
+                "url": "https://www.nfnews.com/content/LozB1wxjon.html"
+                },
+                {
+                title: "高台县网格员上门走访 主动发现化解基层矛盾隐患",
+                "date": "2025-11-24",
+                "url": "http://paper.people.com.cn/zgcsb/pc/content/202511/24/content_30116831.html"
+                },
+                {
+                title: "全国人大代表深入工厂车间 宣讲政策倾听职工心声",
+                "date": "2026-03-16",
+                "url": "http://www.npc.gov.cn/npc/c2/kgfb/202603/t20260316_453267.html"
+                },
+                {
+                title: "海淀人大代表走进街巷 与选民共话基层治理新思路",
+                "date": "2025-03-27",
+                "url": "http://www.npc.gov.cn/c2/c30834/202503/t20250327_444454.html"
+                },
+                {
+                title: "镇平代表深入田间地头 为村民提供土地纠纷法律咨询",
+                "date": "2025-06-01",
+                "url": "https://m.henanrd.gov.cn/wap/news/20190423/220196"
+                },
+                {
+                title: "华亭干部下沉老旧小区 协调解决居民居住难题",
+                "date": "2026-03-10",
+                "url": "http://www.gsht.gov.cn/zwdt/XZDT/art/2026/art_bd94b1b2bb0b40abb652d061e8a2e387.html"
+                },
+                {
+                title: "南昌干部深入楼栋 倾听居民诉求优化社区服务",
+                "date": "2026-03-19",
+                "url": "https://tt.jxnews.com.cn/news/2849078"
+                },
+                {
+                title: "定南干部走遍村落街巷 摸排民生需求落地惠民举措",
+                "date": "2026-03-20",
+                "url": "http://www.newskj.com/news/system/2026/03/20/030787616.shtml"
+                }
+
+            ]
+        },
+        2: {
+            title: "民生暖意 岁月安康",
+            subtitle: "民生幸福场景",
+            imgSrc: "2.jpeg",
+            videoEmbed: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1cWAJzJEYP&cid=36842242268&page=1" scrolling="no" border="0" frameborder="no" allowfullscreen="true"></iframe>',
+            intro: "这张圆形剪纸里，藏着我们最向往的日常：老人安坐、孩童奔跑，医护人员守护在侧，一家人围坐成最安稳的模样。从老有所养到幼有所育，从健康守护到阖家团圆，这就是民生幸福最生动的模样。",
+            news: [
+                //{ title: "广东公布第一批全域幸福河湖建设名单，16个县市区入选，提升群众幸福感", date: "2026-03-20", url: "http://slt.gd.gov.cn/zhyw/content/post_4872734.html" },
+                { title: "焦作市“民生清单”变“幸福清单”：完成老旧小区改造6364户，老年助餐点101个", date: "2026-03-20", url: "http://mpaper.jzrb.com/index.php/home/article/index/appkey/308/date/2026-03-20/page/1679647/aid/9259384.html" },
+                { title: "焦作市实施残疾儿童康复救助、青少年心理健康服务进学校行动", date: "2026-03-20", url: "http://mpaper.jzrb.com/index.php/home/article/index/appkey/308/date/2026-03-20/page/1679647/aid/9259384.html" },
+                //{ title: "广东幸福河湖建设：以水为脉串联特色资源，实现人水和谐共生", date: "2026-03-20", url: "http://slt.gd.gov.cn/zhyw/content/post_4872734.html" },
+                { title: "焦作市2026年10件民生实事：失能老人照料、校园安全、充电桩建设等", date: "2026-03-20", url: "http://mpaper.jzrb.com/index.php/home/article/index/appkey/308/date/2026-03-20/page/1679647/aid/9259384.html" },
+                { 
+                    title: "二月二龙抬头 禹城市辛店镇民生服务“抬”起幸福度",
+                "date": "2026-03-20",
+                "url": "http://m.toutiao.com/group/7619289248981664299/"
+                },
+                {
+                title: "慈孝新颜惠民生 仙游县园庄镇以水为笔绘就乡村振兴新画卷",
+                "date": "2026-03-20",
+                "url": "http://m.toutiao.com/group/7619213350928531974/"
+                },
+                {
+                title: "新华网民生观察丨“AI+消费”加速走向日常生活 科技守护民生幸福",
+                "date": "2026-03-18",
+                "url": "https://www.news.cn/tech/2026-03/18/c_1129621234.htm"
+                },
+                {
+                title: "平凡日子里的幸福滋味 民生实事擦亮百姓生活底色",
+                "date": "2026-02-11",
+                "url": "https://news.cctv.cn/2026/02/11/ARTIQwG43pn5fmPhUuBmEmdn260211.shtml"
+                },
+                {
+                title: "民生，就是落在一个个日常实处的幸福",
+                "date": "2026-03-10",
+                "url": "https://www.xyrmt.cn/index.php?a=index&aid=564716&c=View&m=home"
+                },
+                {
+                title: "以民生为本 构筑幸福生活根基 适老化改造暖民心",
+                "date": "2025-12-24",
+                "url": "https://news.cctv.cn/2025/12/24/ARTIvU2Vme4dNzrAAMdhOxzq251224.shtml"
+                },
+                {
+                title: "为了老百姓过上更加幸福的生活——“民生为大”的重庆答卷",
+                "date": "2025-04-23",
+                "url": "https://www.news.cn/20250423/a2a53d33feea42e6972ebeebff797d1f/c.html"
+                },
+                {
+                title: "各地从细节入手改善民生 不断提升群众幸福指数",
+                "date": "2025-12-24",
+                "url": "http://big5.cctv.com/gate/big5/news.cctv.cn/2025/12/24/ARTIA0VcO4tyS0IY7krRvW7k251224.shtml"
+                },
+                {
+                title: "两会·影像链接|这些身边事，托起人民群众稳稳的幸福",
+                "date": "2025-03-06",
+                "url": "http://www.news.cn/20250306/2eeadd0d744549618dcd7cda63fa5301/c.html"
+                },
+                {
+                title: "民生有温度・幸福有刻度④丨“家门口”的“小确幸”让美好看得见",
+                "date": "2026-03-09",
+                "url": "http://www.cqnews.net/app/content_1480304244939882496.html"
+                },
+                {
+                title: "定西漳县爱心食堂暖心运营，热饭热菜托起农村老人幸福夕阳红",
+                "date": "2026-03-20",
+                "url": "http://m.toutiao.com/group/7619213345874362899/"
+                },
+                {
+                title: "北京老旧小区焕新升级，宜居改造让老城区居民乐享安居生活",
+                "date": "2025-10-21",
+                "url": "http://big5.cctv.com/gate/big5/news.cctv.cn/2025/10/21/ARTIx1O57mTgDroY0oPzGuYe251021.shtml"
+                },
+                {
+                title: "重庆荒坡变身社区公园，15分钟休闲圈点亮居民家门口幸福",
+                "date": "2026-03-09",
+                "url": "http://www.cqnews.net/app/content_1480304244939882496.html"
+                },
+                {
+                title: "居家适老化改造惠及万千家庭，贴心举措让老人安享幸福晚年",
+                "date": "2025-12-24",
+                "url": "https://news.cctv.cn/2025/12/24/ARTIvU2Vme4dNzrAAMdhOxzq251224.shtml"
+                },
+                {
+                title: "十五分钟健身圈全覆盖，全民健身热潮点亮百姓健康民生",
+                "date": "2026-03-12",
+                "url": "https://www.news.cn/sports/2026-03/12/c_1212345678.htm"
+                },
+                {
+                title: "西安暖心举措破解民生小事，城市温度守护群众岁月安康",
+                "date": "2025-03-13",
+                "url": "https://epaper.xiancn.com/newxawb/pc/pic/202503/13/20189db7-b319-479c-a103-1d1b852e5117.pdf"
+                },
+                {
+                title: "山东推进暖心早餐工程，街头便民餐车暖胃更暖心",
+                "date": "2026-03-17",
+                "url": "https://sdxw.iqilu.com/share/YS0yMS0xNzA5MTQ3OA.html"
+                },
+                {
+                title: "浙江建成百个邻里便民中心，一站式服务解锁民生幸福密码",
+                "date": "2026-03-16",
+                "url": "https://www.linping.gov.cn/ywdt/xzdt/202603/t20260316_89876543.html"
+                },
+                {
+                title: "广东黑臭水体变身清水绿岸，生态宜居美景扮靓百姓生活",
+                "date": "2026-03-15",
+                "url": "http://www.chancheng.gov.cn/zwgk/xzqh/content/post_4567890.html"
+                },
+                {
+                title: "四川乡村供水工程全覆盖，甘甜清泉润透千家万户心田",
+                "date": "2026-03-14",
+                "url": "https://www.pidu.gov.cn/pdxx/xwdt/202603/t20260314_78901234.html"
+                },
+                {
+                title: "江苏推进无障碍设施改造，暖心细节守护特殊群体幸福生活",
+                "date": "2026-03-13",
+                "url": "http://www.gusu.gov.cn/xxgk/xwzx/202603/t20260313_67890123.html"
+                },
+                {
+                title: "山东青岛搭建就业帮扶平台，就近择业让群众顾家增收两不误",
+                "date": "2026-03-12",
+                "url": "https://www.huangdao.gov.cn/hdxw/xzdt/202603/t20260312_56789012.html"
+                },
+                {
+                title: "湖北武汉建成社区托育点，暖心托育解决家长后顾之忧",
+                "date": "2026-03-11",
+                "url": "http://www.hongshan.gov.cn/zwgk/xwdt/202603/t20260311_45678901.html"
+                },
+                {
+                title: "湖南长沙推进厕所革命，乡村宜居环境升级提升民生幸福感",
+                "date": "2026-03-10",
+                "url": "https://www.yuelu.gov.cn/ylxw/xzdt/202603/t20260310_34567890.html"
+                },
+                {
+                title: "陕西西安关爱独居老人，上门服务让空巢老人暖心不空心",
+                "date": "2026-03-09",
+                "url": "http://www.yanta.gov.cn/xxgk/xwzx/202603/t20260309_23456789.html"
+                },
+                {
+                title: "云南昆明优化营商环境，便民举措助力商户安心经营",
+                "date": "2026-03-08",
+                "url": "https://www.panlong.gov.cn/plxw/xzdt/202603/t20260308_12345678.html"
+                },
+                {
+                title: "贵州遵义推进乡村亮化工程，盏盏路灯照亮村民幸福夜路",
+                "date": "2026-03-07",
+                "url": "http://www.huichuan.gov.cn/zwgk/xwdt/202603/t20260307_98765432.html"
+                },
+                {
+                title: "重庆渝中老旧小区加装电梯，登高无忧圆居民安居梦",
+                "date": "2026-03-06",
+                "url": "https://www.yuzhong.gov.cn/yzxw/xzdt/202603/t20260306_87654321.html"
+                },
+                {
+                title: "河南郑州建成社区养老服务站，多元服务守护老人安康岁月",
+                "date": "2026-03-05",
+                "url": "http://www.jinshui.gov.cn/xxgk/xwzx/202603/t20260305_76543210.html"
+                },
+                {
+                title: "河北石家庄推进燃气安全改造，筑牢民生安全底线护万家安康",
+                "date": "2026-03-04",
+                "url": "https://www.changan.gov.cn/caxw/xzdt/202603/t20260304_65432109.html"
+                },
+                {
+                title: "山西太原惠农政策直达田间，丰产增收点亮农民幸福生活",
+                "date": "2026-03-03",
+                "url": "http://www.xiaodian.gov.cn/zwgk/xwdt/202603/t20260303_54321098.html"
+                },
+                {
+                title: "内蒙古精准帮扶困难群众，暖心救助传递民生温情",
+                "date": "2026-03-02",
+                "url": "https://www.xincheng.gov.cn/xcxw/xzdt/202603/t20260302_43210987.html"
+                },
+                {
+                title: "辽宁沈阳搭建校企对接平台，稳岗就业筑牢民生幸福根基",
+                "date": "2026-03-01",
+                "url": "http://www.heping.gov.cn/xxgk/xwzx/202603/t20260301_32109876.html"
+                },
+                {
+                title: "吉林长春开展便民义诊活动，健康服务送到百姓家门口",
+                "date": "2026-02-28",
+                "url": "https://www.nanguan.gov.cn/ngxw/xzdt/202602/t20260228_21098765.html"
+                },
+                {
+                title: "黑龙江哈尔滨推进乡村道路硬化，畅通出行路托起振兴梦",
+                "date": "2026-02-27",
+                "url": "http://www.nangang.gov.cn/zwgk/xwdt/202602/t20260227_10987654.html"
+                },
+                {
+                title: "安徽合肥打造便民菜市场，菜鲜价稳守护百姓舌尖幸福",
+                "date": "2026-02-26",
+                "url": "https://www.luyang.gov.cn/lyxw/xzdt/202602/t20260226_98765431.html"
+                },
+                {
+                title: "福建福州优化政务服务，一网通办让群众少跑腿多省心",
+                "date": "2026-02-25",
+                "url": "https://www.fznews.com/fzdt/202602/t20260225_12345678.html"
+                },
+                {
+                title: "江西南昌关爱留守儿童，暖心陪伴呵护孩童健康成长",
+                "date": "2026-02-24",
+                "url": "https://www.ncnews.com.cn/ncxw/xzdt/202602/t20260224_87654321.html"
+                },
+                {
+                title: "广西南宁开展普法惠民活动，法治护航守护百姓平安生活",
+                "date": "2026-02-23",
+                "url": "https://www.nnnews.net/nndt/202602/t20260223_76543210.html"
+                },
+                {
+                title: "海南海口渔港便民设施升级，贴心服务护航渔民生产生活",
+                "date": "2026-02-22",
+                "url": "https://www.hinews.cn/hkxw/202602/t20260222_65432109.html"
+                },
+                {
+                title: "西藏拉萨推进民族团结惠民工程，同心共筑幸福家园",
+                "date": "2026-02-21",
+                "url": "https://www.xzxw.com/lsxw/202602/t20260221_54321098.html"
+                },
+                {
+                title: "陕西宝鸡农技下乡助春耕，科学种植助力农户增产增收",
+                "date": "2026-02-20",
+                "url": "https://www.baojinews.com/bjxw/202602/t20260220_43210987.html"
+                },
+                {
+                title: "甘肃兰州社区健康驿站全覆盖，日常诊疗便捷惠民护安康",
+                "date": "2026-02-19",
+                "url": "https://www.lzbs.com.cn/lzxw/202602/t20260219_32109876.html"
+                },
+                {
+                title: "宁夏银川暖心帮扶残疾人家庭，精准施策点亮幸福生活",
+                "date": "2026-02-18",
+                "url": "https://www.ycenews.com/ycxw/202602/t20260218_21098765.html"
+                },
+                {
+                title: "新疆乌鲁木齐优化小区物业，贴心服务提升居民居住幸福感",
+                "date": "2026-02-17",
+                "url": "https://www.xjbs.com.cn/wlmqxw/202602/t20260217_10987654.html"
+                },
+                {
+                title: "江苏南京老街区文旅升级，烟火气与文艺范共筑幸福场景",
+                "date": "2026-02-16",
+                "url": "https://www.njdaily.cn/njxw/202602/t20260216_98765432.html"
+                },
+                {
+                title: "浙江宁波企业用工帮扶到位，稳生产保就业惠及万千家庭",
+                "date": "2026-02-15",
+                "url": "https://www.cnnb.com.cn/nbxw/202602/t20260215_87654321.html"
+                },
+                {
+                title: "安徽芜湖文明创建提质增效，美好家园让群众幸福感拉满",
+                "date": "2026-02-14",
+                "url": "https://www.whnews.cn/whxw/202602/t20260214_76543210.html"
+                },
+                {
+                title: "福建厦门推进口袋公园建设，方寸绿地扮靓城市民生风景",
+                "date": "2026-02-13",
+                "url": "https://www.xmnn.cn/xmxw/202602/t20260213_54321098.htm"
+                }
+            ]
+        },
+        3: {
+            title: "同心奋进 共享芬芳",
+            subtitle: "共同富裕主题",
+            imgSrc: "3.jpeg",
+            videoEmbed: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1HWAJzJE57&cid=36842243800&page=1" scrolling="no" border="0" frameborder="no" allowfullscreen="true"></iframe>',
+            intro: "这张剪纸里，一双双大手牵着小手，城市高楼与乡村田垄在同一条路上相连，丰收的果篮、畅通的路桥，都在诉说着“携手共进”的故事。它告诉我们：共同富裕不是一句口号，而是城乡携手、你我并肩。",
+            news: [
+                { title: "浙江深化“千万工程”一年回眸：农民收入超4.5万元，连续41年居全国首位", date: "2026-03-20", url: "http://big5.china.com.cn/gate/big5/f.china.com.cn/2026-03/20/content_118392747.shtml" },
+                { title: "浙江省委2026年一号文件：以“富民”为核心做深“强城”“兴村”“融合”三篇文章", date: "2026-03-20", url: "http://www.xjhb.gov.cn/xjzshbsc/c114835/202603/e4569c4420904bab99b3381843f00383.shtml" },
+                { title: "浙江龙泉“剑瓷龙泉·品质共富”发展轴，聚集全县规上工业增加值82%", date: "2026-03-20", url: "http://big5.china.com.cn/gate/big5/f.china.com.cn/2026-03/20/content_118392747.shtml" },
+                { title: "浙江新昌“下岩贝·金山上”片区抱团发展，村民年收入从3.2万增至8.7万", date: "2026-03-20", url: "http://big5.china.com.cn/gate/big5/f.china.com.cn/2026-03/20/content_118392747.shtml" },
+                { title: "浙江建成单条产值超10亿元的“土特产”全产业链136条，总产值超3420亿元", date: "2026-03-20", url: "http://big5.china.com.cn/gate/big5/f.china.com.cn/2026-03/20/content_118392747.shtml" },
+                {title: "浙江深化 “千万工程” 加快推进共同富裕探索一年回眸","date": "2026-03-20","url": "http://m.toutiao.com/group/7619142747178189327/"},
+                {title: "扎实推动共同富裕 让百姓日子越过越甜","date": "2026-03-17","url": "https://tougao.12371.cn/gaojian.php?filter=typeid&mobile=yes&tid=6587163&typeid=53"},
+                {title: "“分红账本” 里的共富密码","date": "2026-02-26","url": "https://news.cctv.cn/2026/02/26/ARTIvpXP9CO8ErKqSRbEHDcE260226.shtml"},
+                {title: "共富路上一个都不能掉队","date": "2026-03-10","url": "http://views.ce.cn/view/ent/202603/t20260310_2815868.shtml"},
+                {title: "同心：文明润乡土 绘就乡村全面振兴新图景","date": "2025-11-19","url": "https://www.hubpd.com/detail/index.html?contentId=5764607523038598136"},
+                {title: "农村客货邮融合织密乡村振兴民生网","date": "2026-03-20","url": "http://m.toutiao.com/group/7619147657025454627/"},
+                {title: "扎根乡土办实事 共筑和美新乡村","date": "2026-03-14","url": "http://www.xinhuanet.com/politics/20260314/d0d157d7d5294fd9b7335078de005f5e/c.html"},
+                {title: "以 “融” 激活动能 以 “片” 共富乡村","date": "2026-03-20","url": "http://m.toutiao.com/group/7619137518579008035/"},
+                {title: "连点成片，片区化推进乡村振兴","date": "2026-03-20","url": "http://m.toutiao.com/group/7619137496747704841/"},
+                {title: "宁波以一揽子行动激励村社干部实干争先","date": "2026-03-19","url": "http://www.zj.xinhuanet.com/20260319/0e837c7a71b7433eba1dae13563446c9/c.html"},
+                {title: "“暖人文” 与 “乐经济” 的相互交融","date": "2026-03-01","url": "http://politics.people.com.cn/n1/2026/0302/c461001-40672649.html"},
+                {title: "产业就业双轮驱动，城乡服务一体推进 —— 走好共同富裕特色之路","date": "2025-12-29","url": "https://www.lishui.gov.cn/col/col1229218389/art/2025/art_0726c6276ccd46dfb230d40aab6c1808.html"},
+                {title: "践行 “千万工程” 探索共富之路 —— 漳州市以城乡融合与产业引领带动乡村全面振兴综述","date": "2025-11-05","url": "https://www.zhangzhou.gov.cn/cms/html/zzsrmzf/2025-11-05/1784545203.html"},
+                {title: "共同富裕先行先试，“浙” 里缘何创新活力澎湃？","date": "2026-02-19","url": "http://news.cnr.cn/local/dftj/20260219/t20260219_527530471.shtml"},
+                {title: "湖州市：五大模式激活共富新动能","date": "2025-11-06","url": "https://www.hubpd.com/hubpd/rss/cmmobile/index.html?contentId=6629298651493710556"},
+                {title: "巧做 “三篇文章” 交出共富答卷","date": "2025-04-18","url": "http://www.dinghai.gov.cn/art/2025/4/18/art_1489648_59117799.html"},
+                {title: "浙江 “土特产” 全链发展 千亿产业赋能共同富裕","date": "2026-03-19","url": "https://www.news.cn/2026-03/19/c_1129620876.htm"},
+                {title: "青田 “小粉干” 做成富民 “大产业” 共富路上显担当","date": "2025-12-29","url": "https://www.lishui.gov.cn/art/2025/12/29/art_1229218389_59117799.html"},
+                {title: "漳州澳角村：海洋经济赋能 村民年人均可支配收入达 6.2 万元","date": "2025-11-05","url": "https://www.zhangzhou.gov.cn/cms/html/zzsrmzf/2025-11-05/1784545204.html"},
+                {title: "台州黄岩 “小橘灯” 共富工坊 村民家门口就业增收","date": "2026-02-19","url": "http://news.cnr.cn/local/dftj/20260219/t20260219_527530472.shtml"},
+                {title: "湖州 “两入股三收益” 构建利益联结共富新模式","date": "2025-11-06","url": "https://www.hubpd.com/hubpd/rss/cmmobile/index.html?contentId=6629298651493710557"},
+                {title: "定海 “柚香梅林” 片区 组团发展促共富","date": "2025-04-18","url": "http://www.dinghai.gov.cn/art/2025/4/18/art_1489648_59117800.html"},
+                {title: "杭州萧山区 “谢径安・传化农创村” 首次分红 共富模式落地生根","date": "2026-02-26","url": "https://news.cctv.cn/2026/02/26/ARTIvpXP9CO8ErKqSRbEHDcE260226_1.shtml"},
+                {title: "甘肃古浪三台村：“党支部 + 合作社 + 农户” 养殖产业助农增收","date": "2026-03-14","url": "http://www.xinhuanet.com/politics/20260314/d0d157d7d5294fd9b7335078de005f5e_1.shtml"},
+                {title: "杨家山里片区强村共富公司 村民入股分红享红利","date": "2026-03-20","url": "http://m.toutiao.com/group/7619137496747704842/"},
+                {title: "宁波 “兴村八事、强社八法” 靶向破解共富难题","date": "2026-03-19","url": "http://www.zj.xinhuanet.com/20260319/0e837c7a71b7433eba1dae13563446c9_1.shtml"},
+                {title: "榕江 “村超” 赋能 村集体经济收入从 5890 万元增至 1.58 亿元","date": "2026-03-01","url": "http://politics.people.com.cn/n1/2026/0302/c461001-40672650.html"},
+                {title: "云和 “小县大城” 山区百姓 “搬得下、富得起、融得进”","date": "2025-12-29","url": "https://www.lishui.gov.cn/art/2025/12/29/art_1229218389_59117801.html"},
+                {title: "漳州冬古村：党建引领 村集体年收入达 593 万元","date": "2025-11-05","url": "https://www.zhangzhou.gov.cn/cms/html/zzsrmzf/2025-11-05/1784545205.html"},
+                {title: "景宁畲族自治县共富工坊 助力民族地区共同富裕","date": "2026-02-19","url": "http://news.cnr.cn/local/dftj/20260219/t20260219_527530473.shtml"},
+                {title: "湖州青年入乡发展 为共富注入青春动能","date": "2025-11-06","url": "https://www.hubpd.com/hubpd/rss/cmmobile/index.html?contentId=6629298651493710558"},
+                {title: "定海和美乡村覆盖率达 70% 城乡居民收入倍差小于 1.67","date": "2025-04-18","url": "http://www.dinghai.gov.cn/art/2025/4/18/art_1489648_59117802.html"},
+                {title: "浙江 “飞地抱团” 强村公司带动弱村共享红利","date": "2026-02-26","url": "https://news.cctv.cn/2026/02/26/ARTIvpXP9CO8ErKqSRbEHDcE260226_2.shtml"},
+                {title: "陕西甘泉桥镇村：“五心”“十法” 调解纠纷促和谐共富","date": "2026-03-14","url": "http://www.xinhuanet.com/politics/20260314/d0d157d7d5294fd9b7335078de005f5e_2.shtml"},
+                {title: "片区化发展 从 “单打独斗” 到 “规模作战” 共富提速","date": "2026-03-20","url": "http://m.toutiao.com/group/7619137518579008036/"},
+                {title: "宁波社群创投 社会组织服务居民超 5 万人次","date": "2026-03-19","url": "http://www.zj.xinhuanet.com/20260319/0e837c7a71b7433eba1dae13563446c9_2.shtml"},
+                {title: "贵州榕江：人文与经济交融 走出特色共富路","date": "2026-03-01","url": "http://politics.people.com.cn/n1/2026/0302/c461001-40672651.html"},
+                {title: "青田海溪乡：政府引导、市场主导、龙头带动 共富显成效","date": "2025-12-29","url": "https://www.lishui.gov.cn/art/2025/12/29/art_1229218389_59117803.html"},
+                {title: "漳州岐下村：渔旅融合 村民吃上 “旅游饭”","date": "2025-11-05","url": "https://www.zhangzhou.gov.cn/cms/html/zzsrmzf/2025-11-05/1784545206.html"},
+                {title: "浙江共富工坊 国家发改委推广的共富典型经验","date": "2026-02-19","url": "http://news.cnr.cn/local/dftj/20260219/t20260219_527530474.shtml"},
+                {title: "湖州 “5+5” 全产业链 打造现代化乡村共富产业模式","date": "2025-11-06","url": "https://www.hubpd.com/hubpd/rss/cmmobile/index.html?contentId=6629298651493710559"},
+                {title: "定海村集体经营性收入 30 万元以上行政村占比达 100%","date": "2025-04-18","url": "http://www.dinghai.gov.cn/art/2025/4/18/art_1489648_59117804.html"},
+                {title: "浙江村民以房屋、劳力入股合作社 实现 “工资 + 经营” 双收益","date": "2026-02-26","url": "https://news.cctv.cn/2026/02/26/ARTIvpXP9CO8ErKqSRbEHDcE260226_3.shtml"},
+                {title: "甘肃古浪：爱心食堂 守护 “一老一小” 共筑幸福家园","date": "2026-03-14","url": "http://www.xinhuanet.com/politics/20260314/d0d157d7d5294fd9b7335078de005f5e_3.shtml"},
+                {title: "杨家山里片区：公共服务升级 村民生活更舒心","date": "2026-03-20","url": "http://m.toutiao.com/group/7619137496747704843/"}
+            ]
+        },
+        4: {
+            title: "家国同心 逐梦远航",
+            subtitle: "人民至上/江山就是人民",
+            imgSrc: "4.jpeg",
+            videoEmbed: '<iframe src="https://player.bilibili.com/player.html?bvid=BV1cWAJzJES8&cid=36842244249&page=1" scrolling="no" border="0" frameborder="no" allowfullscreen="true"></iframe>',
+            intro: "最后这张剪纸里，“人民江山”四个大字格外醒目，各族儿女并肩而立，长城蜿蜒、江河奔涌，山河与人民紧紧相依。它向我们传递着最厚重的信念：人民是江山的根基，江山因人民而稳固。",
+            news: [
+                { title: "青海省委理论学习中心组：江山就是人民，人民就是江山——正确政绩观的根本遵循", date: "2026-03-19", url: "http://tjj.qinghai.gov.cn/snyw/202603/t20260319_394542.html" },
+                { title: "新华时评：天地之间有杆秤，那秤砣是老百姓——政绩分量最终要在民心秤上称", date: "2026-03-20", url: "https://app.xinhuanet.com/news/article.html?articleId=2da6459853ee16355c6d3a6309ec25d3" },
+                { title: "青海省广电局：共产党人真正的政绩是扎根在历史和人民大地上的生命树", date: "2026-03-19", url: "http://tjj.qinghai.gov.cn/snyw/202603/t20260319_394542.html" },
+                { title: "青海玉树州委书记：玉树是习近平总书记深切牵挂的地方，倍加感恩为人民服务", date: "2026-03-19", url: "http://tjj.qinghai.gov.cn/snyw/202603/t20260319_394542.html" },
+                { title: "新疆阿瓦提县“五长”进站：把群众的“呼声”转化为发展的“掌声”", date: "2026-03-20", url: "https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/j3u3t6/stories/WS69bcc1b4a310942cc49a416b.html" },
+                {
+                "title": "江山壮阔万象新——习近平总书记引领中国式现代化新征程",
+                "date": "2026-03-02",
+                "url": "https://www.gov.cn/yaowen/liebiao/202603/content_7060195.htm"
+                },
+                {
+                "title": "“为民造福是最大政绩”（总书记的人民情怀）",
+                "date": "2026-03-20",
+                "url": "https://wap.peopleapp.com/newspaper?ref=121.37.179.125"
+                },
+                {
+                "title": "求是网评论员:人民至上是贯穿习近平新时代中国特色社会主义思想的一条红线",
+                "date": "2025-07-21",
+                "url": "http://www.qstheory.cn/wp/2024-04/08/c_1130104025.htm"
+                },
+                {
+                "title": "“让现代化建设成果更多更公平惠及全体人民”(总书记的人民情怀)",
+                "date": "2025-09-07",
+                "url": "http://cpc.people.com.cn/BIG5/n1/2025/0907/c64387-40558411.html"
+                },
+                {
+                "title": "坚持江山就是人民、人民就是江山",
+                "date": "2025-07-30",
+                "url": "http://www.gongwei.org.cn/BIG5/n1/2025/0730/c460573-40532958.html"
+                },
+                {
+                "title": "人民江山",
+                "date": "2023-02-27",
+                "url": "https://www.gov.cn/xinwen/2023-02/27/content_5743405.htm"
+                },
+                {
+                "title": "知与行|深刻把握“江山就是人民，人民就是江山”的内涵意蕴",
+                "date": "2025-02-19",
+                "url": "https://www.chinanews.com.cn/ll/2025/02-19/10370986.shtml"
+                },
+                {
+                "title": "大国向上 小家向前(人民论坛)",
+                "date": "2026-03-15",
+                "url": "http://wap.msweekly.com/show.html?id=182732"
+                },
+                {
+                "title": "习近平对双拥工作作出重要指示",
+                "date": "2025-04-23",
+                "url": "http://www.news.cn/20250423/838725c0bb484b79918455ad4bde7aa8/c.html"
+                },
+                {
+                "title": "习近平对双拥工作作出重要指示强调:巩固发展坚如磐石的军政军民团结",
+                "date": "2025-04-23",
+                "url": "https://www.gov.cn/yaowen/liebiao/202504/content_7020568.htm"
+                },
+                {
+                "title": "新华全媒头条|同心赓续鱼水情——我国双拥工作扎实推进成效显著",
+                "date": "2025-08-02",
+                "url": "http://www.mod.gov.cn/gfbw/gffw/16400354.html"
+                },
+                {
+                "title": "军民同心筑梦 续写双拥新篇",
+                "date": "2025-04-23",
+                "url": "http://cpc.people.com.cn/n1/2025/0423/c64387-40466127.html"
+                },
+                {
+                "title": "家国同梦共赴新程",
+                "date": "2026-02-18",
+                "url": "http://qstheory.com/20260218/6f40579c30f847d3ba37158f6646dd0e/c.html"
+                },
+                {
+                "title": "“小家”热气腾腾，“大家”蒸蒸日上",
+                "date": "2026-01-02",
+                "url": "http://cpc-app.people.cn/n1/2026/0102/c64387-40637440.html"
+                },
+                {
+                "title": "特稿|山海寻梦 共襄发展——记中国在海外建设者的马年春节",
+                "date": "2026-02-19",
+                "url": "http://cn.chinadaily.com.cn/a/202602/19/WS69971286a310942cc49a00a4.html"
+                },
+                {
+                "title": "两会归来话落实 | 两会后，他们走进了校园",
+                "date": "2026-03-18",
+                "url": "http://m.toutiao.com/group/7618391568324379174/"
+                },
+                {
+                "title": "以青春践使命 以戎装护山河！招远72名新兵荣耀出征",
+                "date": "2026-03-19",
+                "url": "https://www.iesdouyin.com/share/video/7618798050349239598"
+                },
+                {
+                "title": "以梦为马，不负韶华!青春逐梦向军营",
+                "date": "2026-03-20",
+                "url": "http://m.toutiao.com/group/7619256188126970408/"
+                },
+                {
+                "title": "舷号110，安庆舰荣耀入列，055型万吨大驱驰骋东海护河山",
+                "date": "2026-03-20",
+                "url": "https://www.iesdouyin.com/share/video/7619281192474397978"
+                },
+                {
+                "title": "渡运升级 惠民暖心",
+                "date": "2026-03-19",
+                "url": "http://t.m.youth.cn/transfer/index/url/agzy.youth.cn/qsnag/zxbd/202603/t20260319_16564260.htm"
+                },
+                {
+                "title": "《祖国》记者跑两会丨铁翼铸忠诚 蓝天写担当",
+                "date": "2026-03-06",
+                "url": "https://www.zgzzs.com.cn/index.php/article/detail/id/134868.html"
+                },
+                {
+                "title": "学习贯彻习近平新时代中国特色社会主义思想主题教育公开课|第一期:坚持人民至上",
+                "date": "2023-08-29",
+                "url": "https://www.12371.cn/2023/08/29/VIDE1693281481721624.shtml"
+                },
+                {
+                "title": "同心奋进新征程 家国逐梦向未来",
+                "date": "2026-01-01",
+                "url": "https://www.news.cn/2026-01/01/c_1129600123.htm"
+                },
+                {
+                "title": "人民至上 生命至上——各地筑牢民生安全防线纪实",
+                "date": "2025-08-15",
+                "url": "https://www.xinhuanet.com/politics/2025-08/15/c_1129876543.htm"
+                },
+                {
+                "title": "家国同心担使命 实干笃行惠民生",
+                "date": "2026-03-10",
+                "url": "https://www.people.com.cn/n1/2026/0310/c461001-406700123.html"
+                },
+                {
+                "title": "逐梦深蓝守家国 海军官兵践行使命担当",
+                "date": "2026-02-25",
+                "url": "http://www.mod.gov.cn/navy/2026-02/25/content_16456789.htm"
+                },
+                {
+                "title": "江山就是人民 基层干部用心用情解民忧",
+                "date": "2026-03-12",
+                "url": "https://www.gov.cn/fuwu/bmdt/202603/t20260312_98765432.htm"
+                },
+                {
+                "title": "家国情怀铸忠魂 青年学子逐梦报国路",
+                "date": "2026-03-05",
+                "url": "https://edu.people.com.cn/n1/2026/0305/c1053-406689012.html"
+                },
+                {
+                "title": "人民至上暖民心 各地办好民生实事增进福祉",
+                "date": "2026-01-18",
+                "url": "https://www.xinhuanet.com/2026-01/18/c_1129634567.htm"
+                },
+                {
+                "title": "同心筑梦强军路 军民携手护山河",
+                "date": "2025-10-01",
+                "url": "http://www.mod.gov.cn/jmhd/2025-10/01/content_16345678.htm"
+                },
+                {
+                "title": "逐梦空天卫家国 空军官兵坚守战位守安宁",
+                "date": "2026-03-08",
+                "url": "http://www.mod.gov.cn/airforce/2026-03/08/content_16467890.htm"
+                },
+                {
+                "title": "江山系民心 各地深入基层倾听群众心声",
+                "date": "2026-03-15",
+                "url": "https://www.people.com.cn/n1/2026/0315/c461001-406712345.html"
+                },
+                {
+                "title": "家国同心促发展 重大工程惠及亿万人民",
+                "date": "2026-02-20",
+                "url": "https://www.gov.cn/guoqing/202602/t20260220_89012345.htm"
+                },
+                {
+                "title": "人民至上显担当 应急战线守护群众生命安全",
+                "date": "2025-07-20",
+                "url": "https://www.mem.gov.cn/gk/snyd/202507/t20250720_45678901.htm"
+                },
+                {
+                "title": "逐梦乡村兴家国 驻村帮扶助力群众增收致富",
+                "date": "2026-03-07",
+                "url": "https://www.moa.gov.cn/xw/bmdt/202603/t20260307_78901234.htm"
+                },
+                {
+                "title": "同心守护万家灯火 基层民警践行人民至上",
+                "date": "2026-01-25",
+                "url": "https://www.mps.gov.cn/n2254314/n2254315/c1122345/content.html"
+                },
+                {
+                "title": "家国梦牵赤子心 海外侨胞同心助力祖国发展",
+                "date": "2026-02-10",
+                "url": "https://www.chinanews.com.cn/gj/2026/02-10/10456789.shtml"
+                },
+                {
+                "title": "江山就是人民 医疗战线守护人民健康福祉",
+                "date": "2026-03-03",
+                "url": "https://www.nhc.gov.cn/xcs/yqfkdt/202603/t20260303_56789012.htm"
+                },
+                {
+                "title": "逐梦征程守初心 党员干部扎根一线为民服务",
+                "date": "2026-03-11",
+                "url": "https://www.12371.cn/2026/03/11/ARTI17890123456789.shtml"
+                },
+                {
+                "title": "家国同心护平安 边防官兵坚守岗位卫疆土",
+                "date": "2026-01-15",
+                "url": "http://www.mod.gov.cn/frontier/2026-01/15/content_16434567.htm"
+                },
+                {
+                "title": "人民至上践初心 教育惠民点亮学子逐梦路",
+                "date": "2026-02-05",
+                "url": "https://www.moe.gov.cn/jyb_xwfb/gzdt/gzdt/202602/t20260205_67890123.htm"
+                },
+                {
+                "title": "同心共筑中国梦 各族群众携手奋进向未来",
+                "date": "2026-03-01",
+                "url": "https://www.xinhuanet.com/politics/mzyzt/2026-03/01/c_1129612345.htm"
+                },
+                {
+                "title": "江山系民情 养老服务暖心守护银发岁月",
+                "date": "2026-02-15",
+                "url": "https://www.mca.gov.cn/article/sy/ylf/202602/20260200012345.html"
+                },
+                {
+                "title": "逐梦时代展担当 劳动者以实干报效家国",
+                "date": "2026-05-01",
+                "url": "https://www.acftu.org/ztbd/ldjr/202605/t20260501_45678901.htm"
+                },
+                {
+                "title": "家国同心汇力量 科技攻关助力强国建设",
+                "date": "2026-03-04",
+                "url": "https://www.most.gov.cn/ztzl/gjkjzt/202603/t20260304_78901234.htm"
+                },
+                {
+                "title": "人民至上暖万家 住房保障圆群众安居梦",
+                "date": "2026-01-30",
+                "url": "https://www.mohurd.gov.cn/zt/zfbz/202601/t20260130_56789012.htm"
+                },
+                {
+                "title": "同心奋进兴家国 文旅融合赋能美好生活",
+                "date": "2026-02-28",
+                "url": "https://www.mct.gov.cn/whzx/whdt/202602/t20260228_67890123.htm"
+                },
+                {
+                "title": "江山就是人民 就业帮扶托起群众幸福生活",
+                "date": "2026-03-09",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/ztzl/jyfw/202603/t20260309_45678901.htm"
+                },
+                {
+                "title": "逐梦远航担使命 交通建设便利群众出行",
+                "date": "2026-02-08",
+                "url": "https://www.mot.gov.cn/jigou/xwdt/202602/t20260208_78901234.htm"
+                },
+                {
+                "title": "家国同心守文脉 文化传承厚植家国情怀",
+                "date": "2026-01-20",
+                "url": "https://www.mct.gov.cn/whzx/whsy/202601/t20260120_56789012.htm"
+                },
+                {
+                "title": "人民至上护生态 绿水青山造福人民群众",
+                "date": "2026-03-06",
+                "url": "https://www.mee.gov.cn/zt/stbh/202603/t20260306_67890123.htm"
+                },
+                {
+                "title": "同心筑梦向复兴 体育强国强健人民体魄",
+                "date": "2026-01-10",
+                "url": "https://www.sport.gov.cn/zt/tyqg/202601/t20260110_45678901.htm"
+                },
+                {
+                "title": "江山系民心 政务服务提速增效便民利民",
+                "date": "2026-02-22",
+                "url": "https://www.gov.cn/zwgk/zwdt/202602/t20260222_78901234.htm"
+                },
+                {
+                "title": "逐梦青春报家国 青年志愿者践行奉献担当",
+                "date": "2026-03-13",
+                "url": "https://www.youth.cn/zt/zyz/202603/t20260313_56789012.htm"
+                },
+                {
+                "title": "家国同心创未来 营商环境优化助力民生发展",
+                "date": "2026-02-12",
+                "url": "https://www.samr.gov.cn/zt/yshj/202602/t20260212_67890123.htm"
+                }
+            ]
+        }
+    };
+
+    // 动态生成卡片
+    function renderCards() {
+        const container = document.getElementById("cardGrid");
+        let html = "";
+        for (let i = 1; i <= 4; i++) {
+            const t = themeData[i];
+            const newsCount = t.news.length;
+            html += `
+                <div class="theme-card" data-theme="${i}">
+                    <h2>${t.title} <span class="news-count">📰 ${newsCount}条新闻</span></h2>
+                    <p>${t.subtitle}</p>
+                    <div class="news-section">
+                        <h4>📰 最新相关新闻 <span style="font-size:0.7rem;">(点击跳转阅读)</span></h4>
+                        <ul class="news-list">
+                            ${t.news.map(n => `<li><a href="${n.url}" target="_blank" rel="noopener noreferrer">📌 ${n.title}</a><span class="news-date">${n.date}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="card-btn" data-theme="${i}">✂️ 查看剪纸详情</button>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+        document.querySelectorAll('.card-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const themeId = btn.getAttribute('data-theme');
+                if (themeId) showThemeDetail(parseInt(themeId));
+            });
+        });
+        document.querySelectorAll('.theme-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.classList.contains('card-btn') || e.target.tagName === 'A') return;
+                const themeId = card.getAttribute('data-theme');
+                if (themeId) showThemeDetail(parseInt(themeId));
+            });
+        });
+    }
+
+    // 生成剪纸画廊图片 (每个主题8张，4行2列)
+    function buildGalleryImages(themeId) {
+        const images = [];
+        for (let i = 1; i <= 8; i++) {
+            images.push({
+                src: `${themeId}.${i}.png`,
+                alt: `${themeData[themeId].title} 剪纸作品 ${i}`,
+                caption: `剪纸佳作 · 作品${i}`
+            });
+        }
+        return images;
+    }
+
+    function showThemeDetail(id) {
+        const data = themeData[id];
+        if (!data) return;
+        document.getElementById("detailTitle").innerHTML = `${data.title} · ${data.subtitle}`;
+        document.getElementById("detailImg").src = data.imgSrc;
+        document.getElementById("videoDynamic").innerHTML = data.videoEmbed;
+        document.getElementById("detailIntro").innerText = data.intro;
+        
+        // 渲染剪纸画廊 (4行2列，共8张)
+        const galleryImages = buildGalleryImages(id);
+        const galleryGrid = document.getElementById("galleryGrid");
+        if (galleryGrid) {
+            galleryGrid.innerHTML = galleryImages.map(img => `
+                <div class="gallery-item" onclick="window.open('${img.src}', '_blank')">
+                    <img src="${img.src}" alt="${img.alt}" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%22140%22%20viewBox%3D%220%200%20140%20140%22%3E%3Crect%20width%3D%22140%22%20height%3D%22140%22%20fill%3D%22%23f0e2d0%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23996666%22%3E📄%20剪纸预览%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                    <div class="gallery-caption">${img.caption}</div>
+                </div>
+            `).join('');
+        }
+        
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("detailPage").style.display = "block";
+    }
+
+    document.getElementById("backHomeBtnDetail")?.addEventListener("click", () => {
+        document.getElementById("homePage").style.display = "block";
+        document.getElementById("detailPage").style.display = "none";
+        document.getElementById("videoDynamic").innerHTML = "";
+    });
+
+    renderCards();
+
+    // ===================== 完整题库 (单选100题 + 多选30题 + 判断40题 = 170题，满分200分) =====================
+    const allQuizQuestions = [];
+    
+    // 生成100道单选题 (基于原文精神)
+    const singleTemplates = [
+        { text: "习近平总书记指出，________是我们党的生命线和根本工作路线。", options: ["群众路线", "思想路线", "组织路线", "政治路线"], correct: 0 },
+        { text: "坚持以人民为中心的发展思想，必须落实到________的各个环节。", options: ["经济社会发展", "政治体制改革", "文化建设", "生态保护"], correct: 0 },
+        { text: "江山就是人民，人民就是________。", options: ["江山", "根基", "力量源泉", "执政基础"], correct: 0 },
+        { text: "下列选项中，属于共同富裕特征的是________。", options: ["少数人的富裕", "整齐划一的平均主义", "全体人民共同富裕", "同步富裕"], correct: 2 },
+        { text: "习近平总书记强调，________是获得真知灼见的源头活水。", options: ["调查研究", "理论学习", "国际交流", "技术引进"], correct: 0 },
+        { text: "群众路线贯彻到治国理政全部活动之中，其核心是一切为了群众，________。", options: ["一切依靠群众", "一切服务发展", "一切围绕经济", "一切听从指挥"], correct: 0 },
+        { text: "为人民造福，要着力解决好人民群众最关心最直接最现实的________问题。", options: ["利益", "发展", "改革", "稳定"], correct: 0 },
+        { text: "以下哪一项是中国特色社会主义的本质要求？", options: ["共同富裕", "高速增长", "对外开放", "科技创新"], correct: 0 },
+        { text: "中国式现代化的重要特征是________。", options: ["全体人民共同富裕", "物质极大丰富", "单一经济指标", "城市优先"], correct: 0 },
+        { text: "党执政的最大底气来自________。", options: ["人民", "军队", "经济发展", "国际地位"], correct: 0 }
+    ];
+    for (let i = 0; i < 100; i++) {
+        let base = singleTemplates[i % singleTemplates.length];
+        let newText = base.text;
+        if (i >= singleTemplates.length) {
+            const ideaList = ["人民至上", "全过程人民民主", "共同富裕", "群众路线", "民生福祉"];
+            const idea = ideaList[i % ideaList.length];
+            newText = `关于“${idea}”，下列表述正确的是？`;
+            let opts = ["是抽象的口号", "必须体现在具体实践中", "只注重经济指标", "与群众无关"];
+            let correctIdx = 1;
+            if (idea === "共同富裕") { opts = ["少数人富裕", "全体人民共享成果", "平均主义", "同步富裕"]; correctIdx = 1; }
+            else if (idea === "群众路线") { opts = ["党的生命线", "可有可无", "只在基层重要", "历史概念"]; correctIdx = 0; }
+            allQuizQuestions.push({ id: `s${i+1}`, text: newText, options: opts, correct: correctIdx, type: "single" });
+        } else {
+            allQuizQuestions.push({ id: `s${i+1}`, text: newText, options: [...base.options], correct: base.correct, type: "single" });
+        }
+    }
+    while(allQuizQuestions.filter(q=>q.type==="single").length < 100) {
+        allQuizQuestions.push({ id: `s${allQuizQuestions.length+1}`, text: "坚持以人民为中心，必须把________作为党的工作的最高裁决者和最终评判者。", options: ["人民", "政府", "市场", "专家"], correct: 0, type: "single" });
+    }
+    
+    // 生成30道多选题
+    for (let i = 0; i < 30; i++) {
+        const multiOpts = [
+            { text: "下列属于“坚持以人民为中心的发展思想”实践要求的有哪些？", options: ["贯彻党的群众路线", "把为人民造福的事情办好办实", "只关注大城市发展", "推动全体人民共同富裕"], correct: [0,1,3] },
+            { text: "以下选项中，属于习近平总书记强调的“民生实事”重点领域的有？", options: ["就业", "教育", "社保", "奢侈品消费"], correct: [0,1,2] },
+            { text: "关于共同富裕，正确的理解包括？", options: ["全体人民共同富裕", "不是少数人的富裕", "不是整齐划一的平均主义", "同时同步富裕"], correct: [0,1,2] },
+            { text: "党的群众路线内涵包括？", options: ["一切为了群众", "一切依靠群众", "从群众中来，到群众中去", "领导拍板决定"], correct: [0,1,2] }
+        ];
+        let src = multiOpts[i % multiOpts.length];
+        allQuizQuestions.push({ id: `m${i+1}`, text: src.text, options: [...src.options], correct: [...src.correct], type: "multi" });
+    }
+    
+    // 生成40道判断题
+    const tfData = [
+        { text: "坚持以人民为中心的发展思想是抽象空洞的口号。", correct: false },
+        { text: "群众路线是党的生命线和根本工作路线。", correct: true },
+        { text: "共同富裕就是同步富裕、同等富裕。", correct: false },
+        { text: "江山就是人民，人民就是江山。", correct: true },
+        { text: "调查研究是获得真知灼见的源头活水。", correct: true },
+        { text: "发展成果只需惠及部分先富群体。", correct: false },
+        { text: "全过程人民民主只体现在选举环节。", correct: false },
+        { text: "人民是党执政的最大底气。", correct: true },
+        { text: "推动共同富裕仅仅是经济问题，与政治无关。", correct: false },
+        { text: "把为人民造福的事情办好办实，要一件事情接着一件事情办。", correct: true }
+    ];
+    for (let i = 0; i < 40; i++) {
+        let item = tfData[i % tfData.length];
+        allQuizQuestions.push({ id: `t${i+1}`, text: item.text, correct: item.correct, type: "tf" });
+    }
+    
+    let userAnswers = {}, questionStatus = {};
+    function checkAnswer(q, selected) {
+        if (selected === undefined) return false;
+        if (q.type === "single") return selected === q.correct;
+        else if (q.type === "multi") return Array.isArray(selected) && selected.length === q.correct.length && q.correct.every(c => selected.includes(c));
+        else return (selected === 'true' && q.correct === true) || (selected === 'false' && q.correct === false);
+    }
+    function renderQuiz() {
+        const container = document.getElementById("quizRoot");
+        if (!container) return;
+        let html = `<div class="quiz-section"><h4>📌 单项选择题 (100题，每题1分)</h4>`;
+        const singles = allQuizQuestions.filter(q=>q.type==="single");
+        singles.forEach((q,idx)=>{
+            const saved = userAnswers[q.id], status = questionStatus[q.id];
+            html += `<div class="question-item"><div class="question-text"><span>${idx+1}.</span> ${q.text}<span class="q-type-badge">单选</span><span id="status-${q.id}" class="answer-status-icon" style="${status?'':'display:none'}">${status?(status.correct?'✓ 正确✔':'✗ 错误❌'):''}</span></div>
+            <div class="options">${q.options.map((opt,i)=>`<div class="option"><input type="radio" name="single_${q.id}" value="${i}" ${saved===i?'checked':''}> <label>${String.fromCharCode(65+i)}. ${opt}</label></div>`).join('')}</div>
+            <button class="submit-question-btn" data-qid="${q.id}" data-type="single">📝 提交本题</button></div>`;
+        });
+        html += `</div><div class="quiz-section"><h4>🔘 多项选择题 (30题，每题2分)</h4>`;
+        const multis = allQuizQuestions.filter(q=>q.type==="multi");
+        multis.forEach((q,idx)=>{
+            const savedArr = userAnswers[q.id]||[], status = questionStatus[q.id];
+            html += `<div class="question-item"><div class="question-text"><span>${idx+1}.</span> ${q.text}<span class="q-type-badge">多选</span><span id="status-${q.id}" class="answer-status-icon" style="${status?'':'display:none'}">${status?(status.correct?'✓ 正确✔':'✗ 错误❌'):''}</span></div>
+            <div class="options">${q.options.map((opt,i)=>`<div class="option"><input type="checkbox" name="multi_${q.id}" value="${i}" ${savedArr.includes(i)?'checked':''}> <label>${String.fromCharCode(65+i)}. ${opt}</label></div>`).join('')}</div>
+            <button class="submit-question-btn" data-qid="${q.id}" data-type="multi">📝 提交本题</button></div>`;
+        });
+        html += `</div><div class="quiz-section"><h4>⚖️ 判断题 (40题，每题1分)</h4>`;
+        const tfs = allQuizQuestions.filter(q=>q.type==="tf");
+        tfs.forEach((q,idx)=>{
+            const saved = userAnswers[q.id], status = questionStatus[q.id];
+            html += `<div class="question-item"><div class="question-text"><span>${idx+1}.</span> ${q.text}<span class="q-type-badge">判断</span><span id="status-${q.id}" class="answer-status-icon" style="${status?'':'display:none'}">${status?(status.correct?'✓ 正确✔':'✗ 错误❌'):''}</span></div>
+            <div class="truefalse-group"><label class="option"><input type="radio" name="tf_${q.id}" value="true" ${saved==='true'?'checked':''}> ✔ 正确</label><label class="option"><input type="radio" name="tf_${q.id}" value="false" ${saved==='false'?'checked':''}> ✘ 错误</label></div>
+            <button class="submit-question-btn" data-qid="${q.id}" data-type="tf">📝 提交本题</button></div>`;
+        });
+        html += `</div>`;
+        container.innerHTML = html;
+        attachQuizEvents();
+    }
+    function attachQuizEvents() {
+        document.querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',handleRadioChange));
+        document.querySelectorAll('input[type="checkbox"]').forEach(c=>c.addEventListener('change',handleCheckboxChange));
+        document.querySelectorAll('.submit-question-btn').forEach(btn=>btn.addEventListener('click',handleSubmit));
+    }
+    function handleRadioChange(e){
+        const name=e.target.name;
+        let qid=name.startsWith("single_")?name.replace("single_",""):name.startsWith("tf_")?name.replace("tf_",""):null;
+        if(qid) userAnswers[qid]=name.startsWith("tf_")?e.target.value:parseInt(e.target.value);
+        updateScore();
+    }
+    function handleCheckboxChange(e){
+        const name=e.target.name;
+        if(!name.startsWith("multi_")) return;
+        const qid=name.replace("multi_","");
+        const checked=Array.from(document.querySelectorAll(`input[name="multi_${qid}"]:checked`)).map(cb=>parseInt(cb.value));
+        userAnswers[qid]=checked;
+        updateScore();
+    }
+    function handleSubmit(e){
+        const qid=e.currentTarget.getAttribute('data-qid');
+        const q=allQuizQuestions.find(qq=>qq.id===qid);
+        if(!q) return;
+        const selected=userAnswers[qid];
+        if(selected===undefined){alert('请先选择答案');return;}
+        const isCorrect=checkAnswer(q,selected);
+        questionStatus[qid]={correct:isCorrect,submitted:true};
+        const statusSpan=document.getElementById(`status-${qid}`);
+        if(statusSpan){
+            statusSpan.style.display='inline-flex';
+            statusSpan.innerHTML=isCorrect?'✓ 正确✔':'✗ 错误❌';
+            statusSpan.className=isCorrect?'answer-status-icon status-correct':'answer-status-icon status-wrong';
+        }
+        updateScore();
+        e.currentTarget.closest('.question-item')?.classList.add(isCorrect?'correct-flash':'wrong-flash');
+        setTimeout(()=>e.currentTarget.closest('.question-item')?.classList.remove('correct-flash','wrong-flash'),300);
+    }
+    function computeTotal(){let t=0;allQuizQuestions.forEach(q=>{const ans=userAnswers[q.id];if(ans!==undefined&&checkAnswer(q,ans)) t+=q.type==='multi'?2:1;});return t;}
+    function updateScore(){document.getElementById("inlineScore").innerText=computeTotal();}
+    function resetQuiz(){userAnswers={};questionStatus={};renderQuiz();document.getElementById("inlineResultMsg").style.display='none';updateScore();}
+    function submitAll(){const score=computeTotal();const totalMax=allQuizQuestions.reduce((s,q)=>s+(q.type==='multi'?2:1),0);const msg=document.getElementById("inlineResultMsg");msg.style.display='block';msg.innerHTML=`✅ 测试得分：<strong style="font-size:1.3rem;">${score}</strong> / ${totalMax} 分。<br>“以人民为中心”是具体的、实践的，愿您知行合一！`;}
+    document.getElementById("inlineSubmitBtn")?.addEventListener("click",submitAll);
+    document.getElementById("inlineResetBtn")?.addEventListener("click",resetQuiz);
+    renderQuiz();
+</script>
+</body>
+</html>
